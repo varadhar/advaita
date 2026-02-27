@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Existentialism vs. Advaita</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Philosophical Dialogue</h1>
+            <div class="controls">
+                <select id="mode-select">
+                    <option value="parallel">Parallel Mode</option>
+                    <option value="debate">Debate Mode</option>
+                </select>
+                <button id="new-session">New Session</button>
+            </div>
+        </header>
+
+        <main class="three-pane">
+            <section id="left-pane" class="pane">
+                <h2>Existentialist</h2>
+                <div id="existentialist-chat" class="chat-box"></div>
+            </section>
+
+            <section id="middle-pane" class="pane">
+                <h2>Moderator / Debate</h2>
+                <div id="moderator-chat" class="chat-box"></div>
+            </section>
+
+            <section id="right-pane" class="pane">
+                <h2>Advaita</h2>
+                <div id="advaita-chat" class="chat-box"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Enter a philosophical question..." autocomplete="off">
+                <button id="send-btn">Send</button>
+            </div>
+            <p class="session-info">Session ID: <span id="session-id-display">None</span></p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
