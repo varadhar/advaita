@@ -1,14 +1,19 @@
 import os
+import google.generativeai as genai
 from dotenv import load_dotenv
-from openai import AsyncOpenAI
 
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_MODEL = "gpt-4o-mini"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL_NAME = "gemini-1.5-flash"
 
-if not OPENAI_API_KEY:
-    # We'll allow it for now but it should be set in production
-    print("Warning: OPENAI_API_KEY not set.")
+if not GEMINI_API_KEY:
+    print("Warning: GEMINI_API_KEY not set.")
+else:
+    genai.configure(api_key=GEMINI_API_KEY)
 
-client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+def get_model(system_instruction: str):
+    return genai.GenerativeModel(
+        model_name=GEMINI_MODEL_NAME,
+        system_instruction=system_instruction
+    )

@@ -1,4 +1,4 @@
-# Existentialism vs. Advaita Multi-Agent Chatbot
+# Existentialism vs. Advaita Multi-Agent Chatbot (Gemini Version)
 
 This is a multi-agent web application that facilitates philosophical dialogues between an Existentialist Agent, an Advaita Vedanta Agent, and a Moderator Agent.
 
@@ -9,7 +9,7 @@ This is a multi-agent web application that facilitates philosophical dialogues b
 - **Auto-summarization**: Conversation history is summarized after 30 messages to maintain context window efficiency.
 
 ## Tech Stack
-- **Backend**: FastAPI, Python 3.11+, OpenAI GPT-4o-mini.
+- **Backend**: FastAPI, Python 3.11+, Google Gemini API (gemini-1.5-flash).
 - **Frontend**: Vanilla HTML5, CSS3, JavaScript (Fetch API).
 
 ## Setup
@@ -20,7 +20,7 @@ This is a multi-agent web application that facilitates philosophical dialogues b
    ```
 
 2. **Environment Variables**:
-   Copy `.env.example` to `.env` in the root directory and add your OpenAI API Key.
+   Copy `.env.example` to `.env` in the root directory and add your Gemini API Key.
    ```bash
    cp multi_agent_chatbot/.env.example .env
    # Edit .env with your key

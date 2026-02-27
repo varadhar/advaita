@@ -1,25 +1,33 @@
-from .config import client, OPENAI_MODEL
+import google.generativeai as genai
+from .config import get_model
 from .memory import add_message, get_history
 
 class BaseAgent:
     def __init__(self, name: str, system_prompt: str):
         self.name = name
         self.system_prompt = system_prompt
+        self.model = get_model(system_prompt)
 
     async def get_response(self, session_id: str, user_input: str) -> str:
         # Add user message to history
         await add_message(session_id, self.name, "user", user_input)
 
-        # Get full history including system prompt
+        # Get full history
         history = get_history(session_id, self.name)
-        messages = [{"role": "system", "content": self.system_prompt}] + history
+
+        # Gemini expects a different format for history
+        # role: user -> user, role: assistant -> model
+        gemini_history = []
+        # In our case, history already contains the last user message
+        for msg in history[:-1]: # all but the last one
+            role = "user" if msg["role"] == "user" else "model"
+            gemini_history.append({"role": role, "parts": [msg["content"]]})
 
         try:
-            response = await client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=messages
-            )
-            reply = response.choices[0].message.content
+            chat = self.model.start_chat(history=gemini_history)
+            response = await chat.send_message_async(user_input)
+            reply = response.text
+
             # Add agent reply to history
             await add_message(session_id, self.name, "assistant", reply)
             return reply
